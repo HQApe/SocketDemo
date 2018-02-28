@@ -1,1 +1,1 @@
-Socket demo
+这个仓库，是用来学习Socket长连接的，里面分别有原生Socket，Mina，Netty搭建的udp和tcp服务器Demo

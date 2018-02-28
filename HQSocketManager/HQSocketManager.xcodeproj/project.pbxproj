@@ -1,0 +1,572 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		672ACEF91ED44001006A76E7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 672ACEF81ED44001006A76E7 /* main.m */; };
+		672ACEFC1ED44001006A76E7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 672ACEFB1ED44001006A76E7 /* AppDelegate.m */; };
+		672ACEFF1ED44001006A76E7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 672ACEFE1ED44001006A76E7 /* ViewController.m */; };
+		672ACF021ED44001006A76E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 672ACF001ED44001006A76E7 /* Main.storyboard */; };
+		672ACF041ED44001006A76E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 672ACF031ED44001006A76E7 /* Assets.xcassets */; };
+		672ACF071ED44001006A76E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 672ACF051ED44001006A76E7 /* LaunchScreen.storyboard */; };
+		672ACF121ED44001006A76E7 /* HQSocketManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 672ACF111ED44001006A76E7 /* HQSocketManagerTests.m */; };
+		672ACF1D1ED44001006A76E7 /* HQSocketManagerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 672ACF1C1ED44001006A76E7 /* HQSocketManagerUITests.m */; };
+		672ACF2D1ED44034006A76E7 /* HQSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 672ACF2C1ED44034006A76E7 /* HQSocketManager.m */; };
+		672ACF341ED4409E006A76E7 /* Documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = 672ACF2F1ED4409E006A76E7 /* Documentation.html */; };
+		672ACF351ED4409E006A76E7 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 672ACF311ED4409E006A76E7 /* GCDAsyncSocket.m */; };
+		672ACF361ED4409E006A76E7 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 672ACF331ED4409E006A76E7 /* GCDAsyncUdpSocket.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		672ACF0E1ED44001006A76E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 672ACEEC1ED44001006A76E7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 672ACEF31ED44001006A76E7;
+			remoteInfo = HQSocketManager;
+		};
+		672ACF191ED44001006A76E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 672ACEEC1ED44001006A76E7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 672ACEF31ED44001006A76E7;
+			remoteInfo = HQSocketManager;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		672ACEF41ED44001006A76E7 /* HQSocketManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HQSocketManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		672ACEF81ED44001006A76E7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		672ACEFA1ED44001006A76E7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		672ACEFB1ED44001006A76E7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		672ACEFD1ED44001006A76E7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		672ACEFE1ED44001006A76E7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		672ACF011ED44001006A76E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		672ACF031ED44001006A76E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		672ACF061ED44001006A76E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		672ACF081ED44001006A76E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		672ACF0D1ED44001006A76E7 /* HQSocketManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HQSocketManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		672ACF111ED44001006A76E7 /* HQSocketManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQSocketManagerTests.m; sourceTree = "<group>"; };
+		672ACF131ED44001006A76E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		672ACF181ED44001006A76E7 /* HQSocketManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HQSocketManagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		672ACF1C1ED44001006A76E7 /* HQSocketManagerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQSocketManagerUITests.m; sourceTree = "<group>"; };
+		672ACF1E1ED44001006A76E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		672ACF2B1ED44034006A76E7 /* HQSocketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQSocketManager.h; sourceTree = "<group>"; };
+		672ACF2C1ED44034006A76E7 /* HQSocketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQSocketManager.m; sourceTree = "<group>"; };
+		672ACF2F1ED4409E006A76E7 /* Documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Documentation.html; sourceTree = "<group>"; };
+		672ACF301ED4409E006A76E7 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		672ACF311ED4409E006A76E7 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		672ACF321ED4409E006A76E7 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		672ACF331ED4409E006A76E7 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		672ACEF11ED44001006A76E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		672ACF0A1ED44001006A76E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		672ACF151ED44001006A76E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		672ACEEB1ED44001006A76E7 = {
+			isa = PBXGroup;
+			children = (
+				672ACEF61ED44001006A76E7 /* HQSocketManager */,
+				672ACF101ED44001006A76E7 /* HQSocketManagerTests */,
+				672ACF1B1ED44001006A76E7 /* HQSocketManagerUITests */,
+				672ACEF51ED44001006A76E7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		672ACEF51ED44001006A76E7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				672ACEF41ED44001006A76E7 /* HQSocketManager.app */,
+				672ACF0D1ED44001006A76E7 /* HQSocketManagerTests.xctest */,
+				672ACF181ED44001006A76E7 /* HQSocketManagerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		672ACEF61ED44001006A76E7 /* HQSocketManager */ = {
+			isa = PBXGroup;
+			children = (
+				672ACF2A1ED44008006A76E7 /* HQSocketManager */,
+				672ACEFA1ED44001006A76E7 /* AppDelegate.h */,
+				672ACEFB1ED44001006A76E7 /* AppDelegate.m */,
+				672ACEFD1ED44001006A76E7 /* ViewController.h */,
+				672ACEFE1ED44001006A76E7 /* ViewController.m */,
+				672ACF001ED44001006A76E7 /* Main.storyboard */,
+				672ACF031ED44001006A76E7 /* Assets.xcassets */,
+				672ACF051ED44001006A76E7 /* LaunchScreen.storyboard */,
+				672ACF081ED44001006A76E7 /* Info.plist */,
+				672ACEF71ED44001006A76E7 /* Supporting Files */,
+			);
+			path = HQSocketManager;
+			sourceTree = "<group>";
+		};
+		672ACEF71ED44001006A76E7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				672ACEF81ED44001006A76E7 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		672ACF101ED44001006A76E7 /* HQSocketManagerTests */ = {
+			isa = PBXGroup;
+			children = (
+				672ACF111ED44001006A76E7 /* HQSocketManagerTests.m */,
+				672ACF131ED44001006A76E7 /* Info.plist */,
+			);
+			path = HQSocketManagerTests;
+			sourceTree = "<group>";
+		};
+		672ACF1B1ED44001006A76E7 /* HQSocketManagerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				672ACF1C1ED44001006A76E7 /* HQSocketManagerUITests.m */,
+				672ACF1E1ED44001006A76E7 /* Info.plist */,
+			);
+			path = HQSocketManagerUITests;
+			sourceTree = "<group>";
+		};
+		672ACF2A1ED44008006A76E7 /* HQSocketManager */ = {
+			isa = PBXGroup;
+			children = (
+				672ACF2E1ED4409E006A76E7 /* CocoaAsyncSocket */,
+				672ACF2B1ED44034006A76E7 /* HQSocketManager.h */,
+				672ACF2C1ED44034006A76E7 /* HQSocketManager.m */,
+			);
+			path = HQSocketManager;
+			sourceTree = "<group>";
+		};
+		672ACF2E1ED4409E006A76E7 /* CocoaAsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				672ACF2F1ED4409E006A76E7 /* Documentation.html */,
+				672ACF301ED4409E006A76E7 /* GCDAsyncSocket.h */,
+				672ACF311ED4409E006A76E7 /* GCDAsyncSocket.m */,
+				672ACF321ED4409E006A76E7 /* GCDAsyncUdpSocket.h */,
+				672ACF331ED4409E006A76E7 /* GCDAsyncUdpSocket.m */,
+			);
+			path = CocoaAsyncSocket;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		672ACEF31ED44001006A76E7 /* HQSocketManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 672ACF211ED44001006A76E7 /* Build configuration list for PBXNativeTarget "HQSocketManager" */;
+			buildPhases = (
+				672ACEF01ED44001006A76E7 /* Sources */,
+				672ACEF11ED44001006A76E7 /* Frameworks */,
+				672ACEF21ED44001006A76E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HQSocketManager;
+			productName = HQSocketManager;
+			productReference = 672ACEF41ED44001006A76E7 /* HQSocketManager.app */;
+			productType = "com.apple.product-type.application";
+		};
+		672ACF0C1ED44001006A76E7 /* HQSocketManagerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 672ACF241ED44001006A76E7 /* Build configuration list for PBXNativeTarget "HQSocketManagerTests" */;
+			buildPhases = (
+				672ACF091ED44001006A76E7 /* Sources */,
+				672ACF0A1ED44001006A76E7 /* Frameworks */,
+				672ACF0B1ED44001006A76E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				672ACF0F1ED44001006A76E7 /* PBXTargetDependency */,
+			);
+			name = HQSocketManagerTests;
+			productName = HQSocketManagerTests;
+			productReference = 672ACF0D1ED44001006A76E7 /* HQSocketManagerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		672ACF171ED44001006A76E7 /* HQSocketManagerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 672ACF271ED44001006A76E7 /* Build configuration list for PBXNativeTarget "HQSocketManagerUITests" */;
+			buildPhases = (
+				672ACF141ED44001006A76E7 /* Sources */,
+				672ACF151ED44001006A76E7 /* Frameworks */,
+				672ACF161ED44001006A76E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				672ACF1A1ED44001006A76E7 /* PBXTargetDependency */,
+			);
+			name = HQSocketManagerUITests;
+			productName = HQSocketManagerUITests;
+			productReference = 672ACF181ED44001006A76E7 /* HQSocketManagerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		672ACEEC1ED44001006A76E7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = Dinpay;
+				TargetAttributes = {
+					672ACEF31ED44001006A76E7 = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = J6FBY8RMTU;
+						ProvisioningStyle = Automatic;
+					};
+					672ACF0C1ED44001006A76E7 = {
+						CreatedOnToolsVersion = 8.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 672ACEF31ED44001006A76E7;
+					};
+					672ACF171ED44001006A76E7 = {
+						CreatedOnToolsVersion = 8.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 672ACEF31ED44001006A76E7;
+					};
+				};
+			};
+			buildConfigurationList = 672ACEEF1ED44001006A76E7 /* Build configuration list for PBXProject "HQSocketManager" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 672ACEEB1ED44001006A76E7;
+			productRefGroup = 672ACEF51ED44001006A76E7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				672ACEF31ED44001006A76E7 /* HQSocketManager */,
+				672ACF0C1ED44001006A76E7 /* HQSocketManagerTests */,
+				672ACF171ED44001006A76E7 /* HQSocketManagerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		672ACEF21ED44001006A76E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				672ACF071ED44001006A76E7 /* LaunchScreen.storyboard in Resources */,
+				672ACF041ED44001006A76E7 /* Assets.xcassets in Resources */,
+				672ACF021ED44001006A76E7 /* Main.storyboard in Resources */,
+				672ACF341ED4409E006A76E7 /* Documentation.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		672ACF0B1ED44001006A76E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		672ACF161ED44001006A76E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		672ACEF01ED44001006A76E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				672ACEFF1ED44001006A76E7 /* ViewController.m in Sources */,
+				672ACF351ED4409E006A76E7 /* GCDAsyncSocket.m in Sources */,
+				672ACF2D1ED44034006A76E7 /* HQSocketManager.m in Sources */,
+				672ACEFC1ED44001006A76E7 /* AppDelegate.m in Sources */,
+				672ACF361ED4409E006A76E7 /* GCDAsyncUdpSocket.m in Sources */,
+				672ACEF91ED44001006A76E7 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		672ACF091ED44001006A76E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				672ACF121ED44001006A76E7 /* HQSocketManagerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		672ACF141ED44001006A76E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				672ACF1D1ED44001006A76E7 /* HQSocketManagerUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		672ACF0F1ED44001006A76E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 672ACEF31ED44001006A76E7 /* HQSocketManager */;
+			targetProxy = 672ACF0E1ED44001006A76E7 /* PBXContainerItemProxy */;
+		};
+		672ACF1A1ED44001006A76E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 672ACEF31ED44001006A76E7 /* HQSocketManager */;
+			targetProxy = 672ACF191ED44001006A76E7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		672ACF001ED44001006A76E7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				672ACF011ED44001006A76E7 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		672ACF051ED44001006A76E7 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				672ACF061ED44001006A76E7 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		672ACF1F1ED44001006A76E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		672ACF201ED44001006A76E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		672ACF221ED44001006A76E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = J6FBY8RMTU;
+				INFOPLIST_FILE = HQSocketManager/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dinpay.HQSocketManager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		672ACF231ED44001006A76E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = J6FBY8RMTU;
+				INFOPLIST_FILE = HQSocketManager/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dinpay.HQSocketManager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		672ACF251ED44001006A76E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = HQSocketManagerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dinpay.HQSocketManagerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HQSocketManager.app/HQSocketManager";
+			};
+			name = Debug;
+		};
+		672ACF261ED44001006A76E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = HQSocketManagerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dinpay.HQSocketManagerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HQSocketManager.app/HQSocketManager";
+			};
+			name = Release;
+		};
+		672ACF281ED44001006A76E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = HQSocketManagerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dinpay.HQSocketManagerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = HQSocketManager;
+			};
+			name = Debug;
+		};
+		672ACF291ED44001006A76E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = HQSocketManagerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dinpay.HQSocketManagerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = HQSocketManager;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		672ACEEF1ED44001006A76E7 /* Build configuration list for PBXProject "HQSocketManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				672ACF1F1ED44001006A76E7 /* Debug */,
+				672ACF201ED44001006A76E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		672ACF211ED44001006A76E7 /* Build configuration list for PBXNativeTarget "HQSocketManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				672ACF221ED44001006A76E7 /* Debug */,
+				672ACF231ED44001006A76E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		672ACF241ED44001006A76E7 /* Build configuration list for PBXNativeTarget "HQSocketManagerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				672ACF251ED44001006A76E7 /* Debug */,
+				672ACF261ED44001006A76E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		672ACF271ED44001006A76E7 /* Build configuration list for PBXNativeTarget "HQSocketManagerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				672ACF281ED44001006A76E7 /* Debug */,
+				672ACF291ED44001006A76E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 672ACEEC1ED44001006A76E7 /* Project object */;
+}

@@ -7,7 +7,7 @@
 		<key>Pods-WebSocketDemo.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 		<key>SocketRocket.xcscheme</key>
 		<dict>

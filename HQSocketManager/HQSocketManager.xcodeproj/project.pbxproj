@@ -19,6 +19,7 @@
 		672ACF341ED4409E006A76E7 /* Documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = 672ACF2F1ED4409E006A76E7 /* Documentation.html */; };
 		672ACF351ED4409E006A76E7 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 672ACF311ED4409E006A76E7 /* GCDAsyncSocket.m */; };
 		672ACF361ED4409E006A76E7 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 672ACF331ED4409E006A76E7 /* GCDAsyncUdpSocket.m */; };
+		6791F94E2047A21700F02A47 /* HQSocketConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 6791F94D2047A21700F02A47 /* HQSocketConfig.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		672ACF311ED4409E006A76E7 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		672ACF321ED4409E006A76E7 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
 		672ACF331ED4409E006A76E7 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		6791F94C2047A21700F02A47 /* HQSocketConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQSocketConfig.h; sourceTree = "<group>"; };
+		6791F94D2047A21700F02A47 /* HQSocketConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQSocketConfig.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +161,8 @@
 				672ACF2E1ED4409E006A76E7 /* CocoaAsyncSocket */,
 				672ACF2B1ED44034006A76E7 /* HQSocketManager.h */,
 				672ACF2C1ED44034006A76E7 /* HQSocketManager.m */,
+				6791F94C2047A21700F02A47 /* HQSocketConfig.h */,
+				6791F94D2047A21700F02A47 /* HQSocketConfig.m */,
 			);
 			path = HQSocketManager;
 			sourceTree = "<group>";
@@ -315,6 +320,7 @@
 				672ACEFC1ED44001006A76E7 /* AppDelegate.m in Sources */,
 				672ACF361ED4409E006A76E7 /* GCDAsyncUdpSocket.m in Sources */,
 				672ACEF91ED44001006A76E7 /* main.m in Sources */,
+				6791F94E2047A21700F02A47 /* HQSocketConfig.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

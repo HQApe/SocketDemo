@@ -90,15 +90,9 @@
     [self.reciveTextContainer insertText:secretStr];
     
 #warning 此处可以先根据与后台的约定来解析一个消息模型，用于接收信息后，做相应的处理。
-    //接收到服务器的心跳
-    if ([secretStr isEqualToString:@"beatID\n"]) {
-        return;
-    }
     
     //验证连接消息
     if ([secretStr isEqualToString:@"connect\n"]){
-        //发送心跳包
-        [_socket sendBeat];
     //验证消息
     }else if ([secretStr isEqualToString:@"loginSucceed\n"]){
         

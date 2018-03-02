@@ -11,7 +11,7 @@
 
 #define TCP_beatBody  @"beatID\n"    //心跳标识
 #define TCP_AutoConnectCount  5    //自动重连次数，5次重连后默认没有网络就断开了
-#define TCP_BeatDuration  1        //心跳频率
+#define TCP_BeatDuration  5        //心跳频率
 #define TCP_MaxBeatMissCount   5   //最大心跳丢失数
 
 //自动重连次数
@@ -31,6 +31,10 @@ NSInteger autoConnectCount = TCP_AutoConnectCount;
 @property (nonatomic, copy) NSString *host;
 
 @property (nonatomic, assign) uint16_t port;
+
+@property (strong, nonatomic) NSMutableData *reciveData;
+
+@property (copy, nonatomic) ConnectionCompletion connectionCompletion;
 
 @end
 
@@ -66,6 +70,14 @@ static HQSocketManager *_instance = nil;
     return _delegates;
 }
 
+- (NSMutableData *)reciveData
+{
+    if (!_reciveData) {
+        _reciveData = [NSMutableData data];
+    }
+    return _reciveData;
+}
+
 
 - (dispatch_source_t)beatTimer
 {
@@ -73,19 +85,13 @@ static HQSocketManager *_instance = nil;
         _beatTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
         dispatch_source_set_timer(_beatTimer, DISPATCH_TIME_NOW, TCP_BeatDuration * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
         dispatch_source_set_event_handler(_beatTimer, ^{
-            
-            //发送心跳 +1
             _senBeatCount ++ ;
-            //超过3次未收到服务器心跳 , 置为未连接状态
+            //超过最大心跳丢失数, 置为未连接状态
             if (_senBeatCount>TCP_MaxBeatMissCount) {
-                //更新连接状态
                 _connectStatus = SocketConnectStatusUnConnected;
-//                [self disconnect];
             }else{
-                
-                //发送心跳
                 [_connectSocket writeData:[TCP_beatBody dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:9999];
-                NSLog(@"------------------发送了心跳------------------");
+                NSLog(@"【INFO】Socket TCP发送了心跳 》》 IP: %@ 端口：%d", self.host, self.port);
             }
         });
     }
@@ -96,29 +102,31 @@ static HQSocketManager *_instance = nil;
 - (void)initializeConnection
 {
     //将handler设置成接收TCP信息的代理
-    _connectSocket = [[GCDAsyncSocket alloc]initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+    _connectSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     //设置默认关闭读取
     [_connectSocket setAutoDisconnectOnClosedReadStream:NO];
     //默认状态未连接
-    _connectStatus = SocketConnectStatusUnConnected;
+    _connectStatus = SocketConnectStatusUnknow;
 }
 
 
 #pragma mark - 连接服务器端口
 /** 连接服务器端口 */
-- (void)connectServerHost:(NSString *)host port:(uint16_t)port
+- (void)connectServerHost:(NSString *)host port:(uint16_t)port connctionCompletion:(ConnectionCompletion)complition
 {
     _host = host;
     _port = port;
     NSError *error = nil;
+    if (complition) {
+        [self setConnectionCompletion:complition];
+    }
+    
     [_connectSocket connectToHost:host onPort:port error:&error];
-    if (error) {
-        NSLog(@"----------------连接服务器失败----------------");
-    }else{
-        
+    if (error.localizedDescription) {
+        NSLog(@"【INFO】Socket TCP连接服务器失败 \n失败原因：%@ \n\n 》》》》 IP: %@ 端口：%d", error, host, port);
     }
 }
-#pragma mark - 设置代理
+
 /** 添加代理 */
 - (void)addDelegate:(id<HQSocketManagerDelegate>)delegate
 {
@@ -131,7 +139,6 @@ static HQSocketManager *_instance = nil;
     [self.delegates removeObject:delegate];
 }
 
-#pragma mark - 主动断开连接
 /** 主动断开连接 */
 - (void)executeDisconnectServer
 {
@@ -140,7 +147,6 @@ static HQSocketManager *_instance = nil;
     [self disconnect];
 }
 
-#pragma mark - 发送消息
 /** 发送消息 */
 - (void)sendMessage:(NSString *)message timeOut:(NSUInteger)timeOut tag:(long)tag
 {
@@ -152,15 +158,44 @@ static HQSocketManager *_instance = nil;
      对于普通文本消息来讲 , 这里的处理已经基本上足够 . 但是如果是图片进行了分割发送,就会形成多个包 , 那么这里的做法就显得并不健全,严谨来讲,应该设置包头,把该条消息的外信息放置于包头中,例如图片信息,该包长度等,服务器收到后,进行相应的分包,拼接处理.
      */
     messageJson           = [messageJson stringByAppendingString:@"\n"];
-    //base64编码成data
     NSData  *messageData  = [messageJson dataUsingEncoding:NSUTF8StringEncoding];
+    
+    if (!_connectSocket.isConnected) {
+        [self reconnectServerCompletion:^(BOOL connectRsult) {
+            if (connectRsult) {
+                //写入数据
+                [_connectSocket writeData:messageData withTimeout:timeOut tag:tag];
+            }
+        }];
+    }
     //写入数据
     [_connectSocket writeData:messageData withTimeout:timeOut tag:tag];
 }
 
 
 
-#pragma mark - 连接中断
+#pragma mark - Private
+- (void)beginReadDataTimeOut:(long)timeOut tag:(long)tag
+{
+    /** [GCDAsyncSocket LFData] 分包读取协议
+     可以是："\x0D"、"\x0A"、"\x0D\x0A"、"" 、自定义
+     */
+    [_connectSocket readDataToData:[GCDAsyncSocket LFData] withTimeout:timeOut maxLength:0 tag:tag];
+}
+
+- (void)reconnectServerCompletion:(ConnectionCompletion)complition
+{
+    [self connectServerHost:_host port:_port connctionCompletion:complition];
+}
+
+- (void)sendBeat
+{
+    //已经连接
+    _connectStatus = SocketConnectStatusConnected;
+    //定时发送心跳开启
+    dispatch_resume(self.beatTimer);//再次发送心跳包的时候会奔溃，暂未找到原因
+}
+
 - (void)serverInterruption
 {
     //更新soceket连接状态
@@ -178,25 +213,10 @@ static HQSocketManager *_instance = nil;
     _senBeatCount = 0;
 }
 
-#pragma mark - 发送心跳
-- (void)sendBeat
-{
-    //已经连接
-    _connectStatus = SocketConnectStatusConnected;
-    //定时发送心跳开启
-    dispatch_resume(self.beatTimer);//再次发送心跳包的时候会奔溃，暂未找到原因
-}
-
-#pragma mark - 开启接收数据
-- (void)beginReadDataTimeOut:(long)timeOut tag:(long)tag
-{
-    [_connectSocket readDataToData:[GCDAsyncSocket LFData] withTimeout:timeOut maxLength:0 tag:tag];
-}
-
 
 #pragma mark - GCDAsyncSocketDelegate
 
-/*
+ /*
  #pragma mark - TCP连接成功建立 ,配置SSL 相当于https 保证安全性 , 这里是单向验证服务器地址 , 仅仅需要验证服务器的IP即可
  - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port
  {
@@ -208,7 +228,7 @@ static HQSocketManager *_instance = nil;
  [settings setObject:@"此处填服务器IP地址" forKey:GCDAsyncSocketSSLPeerName];
  [_chatSocket startTLS:settings];
  }
- 
+
  #pragma mark - TCP成功获取安全验证
  - (void)socketDidSecure:(GCDAsyncSocket *)sock
  {
@@ -227,88 +247,87 @@ static HQSocketManager *_instance = nil;
  }
  */
 
-#pragma mark - TCP连接成功建立 ,配置SSL 相当于https 保证安全性 , 这里是单向验证服务器地址 , 仅仅需要验证服务器的IP即可
-- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port
-{
-    NSLog(@"----------------连接服务器成功----------------");
-    autoConnectCount = 5;
-    //开始接受服务器数据
-    [self beginReadDataTimeOut:-1 tag:0];
-}
-
-
-#pragma mark - 写入数据成功 , 重新开启允许读取数据
-- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag
-{
-    NSLog(@"数据发送成功");
-    
-    //开始接受服务器数据
-    [self beginReadDataTimeOut:-1 tag:0];
-}
-
-#pragma mark - 接收到数据
-- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
-{
-    [self beginReadDataTimeOut:-1 tag:0];
-    //正式情况下，代理处理要放到心跳包判断之后
-    for (id delegate in self.delegates) {
-        if ([delegate respondsToSelector:@selector(hq_socketManager:didReciveMessageDate:)]) {
-            [delegate hq_socketManager:self didReciveMessageDate:data];
-        }
-    }
-    //转为明文消息
-    NSString *secretStr  = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    
-#warning 此处可以先根据与后台的约定来解析一个消息模型，用于接收信息后，做相应的处理。
-    //接收到服务器的心跳
-    if ([secretStr isEqualToString:TCP_beatBody]) {
-        //置为0
-        _senBeatCount = 0;
-        NSLog(@"------------------接收到服务器心跳-------------------");
-        return;
-    }
-    
-#warning 在这里，成功收到服务器返回的数据，就开始发送心跳包
-    
-    
-#warning  - 注意 ...
-    //此处可以进行本地数据库存储,具体的就不多解释 , 通常来讲 , 每个登录用户创建一个DB ,每个DB对应3张表足够 ,一张用于存储聊天列表页 , 一张用于会话聊天记录存储,还有一张用于好友列表/群列表的本地化存储. 但是注意的一点 , 必须设置自增ID . 此外,个人建议预留出10个或者20个字段以备将来增加需求,或者使用数据库升级亦可
-    
-    //进行回执服务器,告知服务器已经收到该条消息(实际上是可以解决消息丢失问题 , 因为心跳频率以及网络始终是有一定延迟,当你断开的一瞬间,服务器并没有办法非常及时的获取你的连接状态,所以进行双向回执会更加安全,服务器推向客户端一条消息,客户端未进行回执的话,服务器可以将此条消息设置为离线消息,再次进行推送)
-    
-    //消息分发,将消息发送至每个注册的Object中 , 进行相应的布局等操作
-    /*for (id delegate in self.delegates) {
-        
-        if ([delegate respondsToSelector:@selector(didReceiveMessage:type:)]) {
-            [delegate didReceiveMessage:messageModel type:messageType];
-        }
-    }*/
-}
-
-#pragma mark - TCP已经断开连接
+#pragma mark - TCP已经断开连接、失败
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
 {
-    NSLog(@"----------------与服务器连接失败------------------");
+    NSLog(@"【INFO】Socket TCP连接服务器失败 \n失败原因：%@ \n\n 》》》》IP：%@ 端口：%d",err, self.host, self.port);
     //如果是主动断开连接
     if (_connectStatus == SocketConnectStatusDisconnectByUser) return;
     //置为未连接状态
     _connectStatus  = SocketConnectStatusUnConnected;
     //自动重连
     if (autoConnectCount) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self reconnectServerCompletion:nil];
+            NSLog(@"【INFO】Socket TCP第%ld次重连 》》IP：%@ 端口：%d",(long)autoConnectCount, self.host, self.port);
+            autoConnectCount -- ;
+        });
         
-        [self reconnectServer];
-        
-        NSLog(@"-------------第%ld次重连--------------",(long)autoConnectCount);
-        autoConnectCount -- ;
     }else{
-        NSLog(@"----------------重连次数已用完------------------");//再继续重连
+        if (self.connectionCompletion) {
+            self.connectionCompletion(NO);
+            _connectionCompletion = nil;
+        }
+        [self disconnect];
+        NSLog(@"【INFO】Socket TCP重连次数已用完 》》IP：%@ 端口：%d", self.host, self.port);//再继续重连
     }
 }
 
-#pragma mark - 重新连接服务器
-- (void)reconnectServer
+#pragma mark - TCP连接成功建立 ,配置SSL 相当于https 保证安全性 , 这里是单向验证服务器地址 , 仅仅需要验证服务器的IP即可
+- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port
 {
-    [self connectServerHost:_host port:_port];
+    NSLog(@"【INFO】 Socket TCP连接服务器成功 》》 IP: %@ 端口：%d", host, port);
+    if (self.connectionCompletion) {
+        self.connectionCompletion(YES);
+        _connectionCompletion = nil;
+    }
+    
+    autoConnectCount = 5;
+    //开始接受服务器数据
+    [self beginReadDataTimeOut:-1 tag:0];
+    //开始发送心跳包
+    [self sendBeat];
+}
+
+
+#pragma mark - 写入数据成功 , 重新开启允许读取数据
+- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag
+{
+    NSLog(@"【INFO】Socket TCP数据发送成功 》》IP：%@ 端口：%d", sock.connectedHost, sock.connectedPort);
+    //等待接受服务器数据
+    [self beginReadDataTimeOut:-1 tag:0];
+}
+
+#pragma mark - 接收到数据
+- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
+{
+    NSLog(@"【INFO】Socket TCP数据接收成功 》》IP：%@ 端口：%d", sock.connectedHost, sock.connectedPort);
+    /**
+     1.数据粘包处理；
+     2.解析协议头；
+     3.数据完整性验证；
+     4.数据处理
+     5.数据解析、分发
+     */
+    [self.reciveData appendData:data];
+    //等待接受服务器数据
+    [self beginReadDataTimeOut:-1 tag:0];
+    
+    //解析消息
+    NSString *secretStr  = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    if ([secretStr isEqualToString:TCP_beatBody]) {
+        //重置心跳包丢失次数为0
+        _senBeatCount = 0;
+        NSLog(@"INFO】Socket TCP接收到心跳 》》IP：%@ 端口：%d", sock.connectedHost, sock.connectedPort);
+        return;
+    }
+    //消息分发
+    for (id delegate in self.delegates) {
+        if ([delegate respondsToSelector:@selector(hq_socketManager:didReciveMessageDate:)]) {
+            [delegate hq_socketManager:self didReciveMessageDate:data];
+        }
+    }
+    
 }
 
 #pragma mark - 发送消息超时

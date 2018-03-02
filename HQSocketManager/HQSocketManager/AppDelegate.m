@@ -19,7 +19,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [[HQSocketManager shareManager] connectServerHost:@"192.168.21.201" port:9999];
+    [[HQSocketManager shareManager] connectServerHost:@"192.168.21.74" port:6789 connctionCompletion:^(BOOL connectRsult) {
+    }];
     [[HQSocketManager shareManager] addDelegate:self];
     return YES;
 }
@@ -28,9 +29,6 @@
 {
     //转为明文消息
     NSString *secretStr  = [[NSString alloc] initWithData:messageDate encoding:NSUTF8StringEncoding];
-    //    //去除'\n'
-    //    secretStr = [secretStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-    
     NSLog(@"%@", secretStr);
 }
 

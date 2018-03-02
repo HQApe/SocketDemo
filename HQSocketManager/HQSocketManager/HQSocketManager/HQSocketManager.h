@@ -15,6 +15,8 @@ typedef NS_ENUM(NSUInteger, SocketConnectStatus) {
     SocketConnectStatusUnknow            = 3<<0 //未知
 };
 
+typedef void (^ConnectionCompletion)(BOOL connectRsult);
+
 @class HQSocketManager;
 
 @protocol HQSocketManagerDelegate <NSObject>
@@ -28,22 +30,19 @@ typedef NS_ENUM(NSUInteger, SocketConnectStatus) {
 @interface HQSocketManager : NSObject
 
 //socket连接状态
-@property (nonatomic, assign) SocketConnectStatus connectStatus;
+@property (nonatomic, assign, readonly) SocketConnectStatus connectStatus;
 
 /** 长连接单例 */
 + (instancetype)shareManager;
+
+/** 连接服务器端口 */
+- (void)connectServerHost:(NSString *)host port:(uint16_t)port connctionCompletion:(ConnectionCompletion)complition;
 
 /** 添加代理 */
 - (void)addDelegate:(id<HQSocketManagerDelegate>)delegate;
 
 /** 移除代理 */
 - (void)removeDelegate:(id<HQSocketManagerDelegate>)delegate;
-
-/** 发送心跳包 */
-- (void)sendBeat;
-
-/** 连接服务器端口 */
-- (void)connectServerHost:(NSString *)host port:(uint16_t)port;
 
 /** 主动断开连接 */
 - (void)executeDisconnectServer;
